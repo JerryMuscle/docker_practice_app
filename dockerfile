@@ -1,0 +1,6 @@
+FROM python:3.11-slim
+
+WORKDIR /book_app
+RUN pip install Flask
+
+CMD ["python", "main.py"]
