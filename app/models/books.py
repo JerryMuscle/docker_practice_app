@@ -6,4 +6,4 @@ class Books(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     book_name = db.Column(db.String(100))
     author = db.Column(db.String(30))
-    register_date = created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    register_date = db.Column(db.DateTime, nullable=False, default=datetime.now)

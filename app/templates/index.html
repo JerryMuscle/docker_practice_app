@@ -44,18 +44,43 @@
     <h3>書籍一覧</h3>
     <table border="1">
         <tr>
-            <th>書籍名</th>
-            <th>著者</th>
-            <th>登録日</th>
+          <th>id</th>
+          <th>書籍名</th>
+          <th>著者</th>
+          <th>登録日</th>
+          <th></th>
         </tr>
+          {% for book in books %}
+            <tr>
+              <td>
+                {{ book.id }}
+              </td>
+              <td>
+                {{ book.book_name }}
+              </td>
+              <td>
+                {{ book.author }}
+              </td>
+              <td>
+                {{ book.register_date.strftime('%Y-%m-%d') }}
+              </td>
+              <td>
+                <form action="{{ url_for('delete_book', id=book.id) }}" method="POST" onsubmit="return confirm('本当に削除しますか？');">
+                  <button type="submit" style="background-color: red; color: white;">
+                    削除
+                  </button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
     </table>
 
-    <!-- モーダル -->
+    <!-- 新規登録モーダル -->
   <div id="bookModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
       <h2>書籍の新規登録</h2>
-      <form>
+      <form action="/books/register" method="POST">
         <label for="title">書籍名:</label><br>
         <input type="text" id="title" name="title"><br><br>
 
@@ -66,8 +91,8 @@
       </form>
     </div>
   </div>
-
   <script>
+
     const modal = document.getElementById("bookModal");
     const openBtn = document.getElementById("openModal");
     const closeBtn = document.querySelector(".close");
